@@ -8,31 +8,46 @@ import {
   Code,
   Grid,
   theme,
+  Flex,
+  Heading,
+  Input,
+  Button,
+  useColorMode,
+  useToast,
 } from "@chakra-ui/react"
 import { ColorModeSwitcher } from "./ColorModeSwitcher"
 import { Logo } from "./Logo"
+import { Route, Router, Routes } from "react-router-dom"
+import Main from "./pages/Main"
+import Login from "./pages/Login"
+import Layout from "./components/layout/Layout"
+import WithSubnavigation from "./components/layout/Layout"
+import LargeWithAppLinksAndSocial from "./components/layout/Footer"
+import SimpleCard from "./pages/Login"
+import SignupCard from "./pages/Signup"
+import NotFound from "./pages/NotFound"
 
-export const App = () => (
-  <ChakraProvider theme={theme}>
-    <Box textAlign="center" fontSize="xl">
-      <Grid minH="100vh" p={3}>
-        <ColorModeSwitcher justifySelf="flex-end" />
-        <VStack spacing={8}>
-          <Logo h="40vmin" pointerEvents="none" />
-          <Text>
-            Edit <Code fontSize="xl">src/App.tsx</Code> and save to reload.
-          </Text>
-          <Link
-            color="teal.500"
-            href="https://chakra-ui.com"
-            fontSize="2xl"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn Chakra
-          </Link>
-        </VStack>
-      </Grid>
-    </Box>
-  </ChakraProvider>
-)
+export const App = () => {
+
+  // const { toggleColorMode } = useColorMode();
+  //https://app.gitbook.com/invite/DKAOXHQNPZDQ4vTCfBcu/1wDfTDmfglh2vtTT4ZDj
+  //깃북 초대링크
+
+  return(
+  <ChakraProvider theme={theme}>  
+    <WithSubnavigation />
+      <Routes>
+        <Route path="/" element={<Main />} />
+        <Route path="/login" element={<Login/>}/>
+        <Route path="/signup" element={<SignupCard/>} />
+        <Route path={"*"} element={<NotFound/>}/>
+
+      </Routes>
+    <LargeWithAppLinksAndSocial />
+   </ChakraProvider>
+
+  )
+
+  
+}
+
